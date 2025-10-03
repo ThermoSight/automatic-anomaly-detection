@@ -26,6 +26,8 @@ Model_Inference/
 
 ## Setup
 
+This should be run on an Ubuntu environment.
+
 1. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
