@@ -1,0 +1,13 @@
+# Core dependencies
+torch
+torchvision
+numpy
+opencv-python
+pillow
+omegaconf
+anomalib
+
+# Optional dependencies
+cloudinary
+requests
+watchdog  # For file watching functionality
