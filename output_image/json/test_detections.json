@@ -1,0 +1,119 @@
+{
+  "image_filename": "test.jpg",
+  "image_path": "/mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference/test_image/test.jpg",
+  "processing_timestamp": "2025-10-03 01:19:57",
+  "classification": "Loose Joint (Faulty)",
+  "total_detections": 7,
+  "output_files": {
+    "labeled_image": "/mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference/output_image/labeled/test_boxed.jpg",
+    "mask_image": "/mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference/output_image/masks/test_mask.png",
+    "filtered_image": "/mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference/output_image/filtered/test_filtered.png"
+  },
+  "detections": [
+    {
+      "id": 1,
+      "type": "Loose Joint (Faulty)",
+      "confidence": 0.733,
+      "bbox": {
+        "x": 160,
+        "y": 160,
+        "width": 320,
+        "height": 320
+      },
+      "center": {
+        "x": 320,
+        "y": 320
+      }
+    },
+    {
+      "id": 2,
+      "type": "Point Overload (Faulty)",
+      "confidence": 0.725,
+      "bbox": {
+        "x": 384,
+        "y": 411,
+        "width": 94,
+        "height": 102
+      },
+      "center": {
+        "x": 431,
+        "y": 462
+      }
+    },
+    {
+      "id": 3,
+      "type": "Point Overload (Faulty)",
+      "confidence": 0.74,
+      "bbox": {
+        "x": 279,
+        "y": 526,
+        "width": 36,
+        "height": 66
+      },
+      "center": {
+        "x": 297,
+        "y": 559
+      }
+    },
+    {
+      "id": 4,
+      "type": "Tiny Faulty Spot",
+      "confidence": 0.596,
+      "bbox": {
+        "x": 369,
+        "y": 283,
+        "width": 26,
+        "height": 38
+      },
+      "center": {
+        "x": 382,
+        "y": 302
+      }
+    },
+    {
+      "id": 5,
+      "type": "Tiny Faulty Spot",
+      "confidence": 0.705,
+      "bbox": {
+        "x": 243,
+        "y": 572,
+        "width": 4,
+        "height": 12
+      },
+      "center": {
+        "x": 245,
+        "y": 578
+      }
+    },
+    {
+      "id": 6,
+      "type": "Tiny Potential Spot",
+      "confidence": 0.686,
+      "bbox": {
+        "x": 162,
+        "y": 256,
+        "width": 3,
+        "height": 11
+      },
+      "center": {
+        "x": 163,
+        "y": 261
+      }
+    },
+    {
+      "id": 7,
+      "type": "Tiny Potential Spot",
+      "confidence": 0.677,
+      "bbox": {
+        "x": 543,
+        "y": 323,
+        "width": 3,
+        "height": 9
+      },
+      "center": {
+        "x": 544,
+        "y": 327
+      }
+    }
+  ]
+}

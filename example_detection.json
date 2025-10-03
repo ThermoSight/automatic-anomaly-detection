@@ -1,0 +1,44 @@
+{
+  "image_filename": "test.jpg",
+  "image_path": "d:\\Semester_7\\EN3350_SDC\\SDP\\Model_Inference\\Model_Inference\\test_image\\test.jpg",
+  "processing_timestamp": "2025-10-02 14:30:15",
+  "classification": "Point Overload (Faulty)",
+  "total_detections": 2,
+  "output_files": {
+    "labeled_image": "d:\\Semester_7\\EN3350_SDC\\SDP\\Model_Inference\\Model_Inference\\output_image\\labeled\\test_boxed.png",
+    "mask_image": "d:\\Semester_7\\EN3350_SDC\\SDP\\Model_Inference\\Model_Inference\\output_image\\masks\\test_mask.png",
+    "filtered_image": "d:\\Semester_7\\EN3350_SDC\\SDP\\Model_Inference\\Model_Inference\\output_image\\filtered\\test_filtered.png"
+  },
+  "detections": [
+    {
+      "id": 1,
+      "type": "Point Overload (Faulty)",
+      "confidence": 0.85,
+      "bbox": {
+        "x": 150,
+        "y": 200,
+        "width": 80,
+        "height": 60
+      },
+      "center": {
+        "x": 190,
+        "y": 230
+      }
+    },
+    {
+      "id": 2,
+      "type": "Point Overload (Potential)",
+      "confidence": 0.72,
+      "bbox": {
+        "x": 300,
+        "y": 350,
+        "width": 65,
+        "height": 45
+      },
+      "center": {
+        "x": 332,
+        "y": 372
+      }
+    }
+  ]
+}
