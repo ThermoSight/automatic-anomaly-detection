@@ -26,8 +26,11 @@ Model_Inference/
 
 ## Setup
 
+<<<<<<< HEAD
 This should be run on an Ubuntu environment.
 
+=======
+>>>>>>> 79296fedd102c10caf74d621caa9f514e282362f
 1. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
@@ -312,4 +315,8 @@ detection_count = len(result['boxes'])
 - The system automatically creates output directories if they don't exist
 - Cloudinary integration is optional and only used for cloud storage (if needed)
 - All local processing works without internet connection
+<<<<<<< HEAD
 - The model supports GPU acceleration when available but works on CPU as well
+=======
+- The model supports GPU acceleration when available but works on CPU as well
+>>>>>>> 79296fedd102c10caf74d621caa9f514e282362f
