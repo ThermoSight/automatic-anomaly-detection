@@ -12,48 +12,56 @@ Ensure you have:
 ## Setup
 
 This model must be run in Ubuntu virtual environment:
-# 🔹 1. Intall wsl and setup logins
+### 🔹 1. Intall wsl and setup logins
+```bash
 wsl --install -d Ubuntu-22.04
-
-# 🔹 1. In the Linux terminal, install venv (if not already installed)
+```
+### 🔹 2. In the Linux terminal, install venv (if not already installed)
+```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3 python3-pip python3-venv git wget unzip
-
-# 🔹 2. Go to your project folder
-cd /mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference
-
-# 🔹 3. Create and activate a virtual environment named .venv
+```
+### 🔹 3. Go to your project folder
+```bash
+cd /mnt/<Path_to_project_folder>
+```
+### 🔹 4. Create and activate a virtual environment named .venv
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-
-# 🔹 5. (Optional) Upgrade pip
+```
+### 🔹 5. (Optional) Upgrade pip
+```bash
 pip install --upgrade pip
-
-# 🔹 6. Install your dependencies in the requirements.txt file
+```
+### 🔹 6. Install your dependencies in the requirements.txt file
+```bash
 pip install -r requirements.txt
-# or manually install 
-# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+```
 
-# 🔹 7. RPrepare expected folders (if missing)
+### 🔹 7. Prepare expected folders (if missing)
+```bash
 mkdir -p model_weights test_image output_image configs
+```
 - Put your checkpoint as: model_weights/model.ckpt
 - Put a test image as: test_image/test.jpg
 
-# 🔹 7. Run your Python file inside the venv
+### 🔹 8. Run your Python file inside the venv
+```bash
 python pipeline.py
+```
 
 
-
-2. **Project folders & files you must provide**
+## 2. **Project folders & files you must provide**
    - Place your trained model file in `model_weights/model.ckpt`
    - Ensure configuration file exists at `configs/patchcore_transformers.yaml`
    - test_image/test.jpg                   # any test thermal image you want to try
    - output_image/                         # results will be written here
 
 
-### Local Image Processing
+## 3. Local Image Processing
 
-#### Method 1: Using the Test Script (Recommended)
+#### Using the Test Script (Recommended)
 
 ```bash
 python test_local_inference.py
@@ -111,7 +119,7 @@ For each processed image, the following files are generated in `output_image/`:
 3. **`filtered/`** - Images showing only anomalous regions
 4. **`json/`** - Detection results in JSON format with coordinates and metadata
 
-## JSON Detection Format
+## 4. JSON Detection Format
 
 Each processed image generates a JSON file with the following structure:
 
@@ -147,7 +155,7 @@ Each processed image generates a JSON file with the following structure:
 }
 ```
 
-## Detection Categories
+## 5. Detection Categories
 
 The system can detect and classify:
 
@@ -174,7 +182,7 @@ result = process_local_test_image("test.jpg", save_json=True)
 print(f"JSON saved to: {result['json_path']}")
 ```
 
-### 2. Edit JSON Files
+## 6. Edit JSON Files
 Open the generated JSON file and modify detection coordinates, types, or confidence scores:
 ```json
 {
@@ -194,7 +202,7 @@ Open the generated JSON file and modify detection coordinates, types, or confide
 }
 ```
 
-### 3. Auto-Update Images
+## 7. Auto-Update Images
 Start the file watcher to automatically regenerate images when JSON files change:
 ```python
 from test_local_inference import start_json_watcher, stop_json_watcher
@@ -208,7 +216,7 @@ observer = start_json_watcher()
 stop_json_watcher(observer)
 ```
 
-### 4. Manual Regeneration
+## 8. Manual Regeneration
 ```python
 from test_local_inference import regenerate_image_from_json
 
@@ -235,7 +243,7 @@ for image_name in list_test_images():
         print(f"Result: {result['label']}")
 ```
 
-## Troubleshooting
+## 8. Troubleshooting
 
 1. **Model file not found**: Ensure `model_weights/model.ckpt` exists
 2. **Config file not found**: Ensure `configs/patchcore_transformers.yaml` exists  
@@ -243,7 +251,7 @@ for image_name in list_test_images():
 4. **Import errors**: Install missing packages with `pip install -r requirements.txt`
 5. **CUDA errors**: The system will automatically fall back to CPU if CUDA is unavailable
 
-## Notes
+## 9. Notes
 
 - The system automatically creates output directories if they don't exist
 - Cloudinary integration is optional and only used for cloud storage (if needed)
