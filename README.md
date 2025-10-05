@@ -2,49 +2,54 @@
 
 This project provides inference capabilities for thermal image analysis using PatchCore anomaly detection. It can detect various types of electrical faults including point overloads, wire overloads, and loose joints.
 
-## Folder Structure
+## Prerequisites
 
-```
-Model_Inference/
-├── configs/
-│   └── patchcore_transformers.yaml    # Model configuration
-├── model_weights/
-│   └── model.ckpt                     # Pre-trained model weights
-├── test_image/
-│   └── test.jpg                       # Input test images
-├── output_image/
-│   ├── masks/                         # Anomaly masks
-│   ├── filtered/                      # Filtered images
-│   ├── labeled/                       # Final labeled images with bounding boxes
-│   └── json/                          # Detection results in JSON format
-├── inference_core.py                  # Core inference functions
-├── pipeline.py                        # Original pipeline script
-├── test_local_inference.py            # Test script for local processing
-├── example_detection.json             # Example JSON format
-└── requirements.txt                   # Required packages
-```
+Ensure you have:
+- Windows 10/11 with **WSL2** and **Ubuntu** installed  
+- Python ≥ 3.10  
+- Internet connection (to fetch packages)
 
 ## Setup
 
-<<<<<<< HEAD
-This should be run on an Ubuntu environment.
+This model must be run in Ubuntu virtual environment:
+# 🔹 1. Intall wsl and setup logins
+wsl --install -d Ubuntu-22.04
 
-=======
->>>>>>> 79296fedd102c10caf74d621caa9f514e282362f
-1. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+# 🔹 1. In the Linux terminal, install venv (if not already installed)
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3 python3-pip python3-venv git wget unzip
 
-2. **Ensure Model and Config Files**
+# 🔹 2. Go to your project folder
+cd /mnt/d/Semester_7/EN3350_SDC/SDP/Model_Inference/Model_Inference
+
+# 🔹 3. Create and activate a virtual environment named .venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 🔹 5. (Optional) Upgrade pip
+pip install --upgrade pip
+
+# 🔹 6. Install your dependencies in the requirements.txt file
+pip install -r requirements.txt
+# or manually install 
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# 🔹 7. RPrepare expected folders (if missing)
+mkdir -p model_weights test_image output_image configs
+- Put your checkpoint as: model_weights/model.ckpt
+- Put a test image as: test_image/test.jpg
+
+# 🔹 7. Run your Python file inside the venv
+python pipeline.py
+
+
+
+2. **Project folders & files you must provide**
    - Place your trained model file in `model_weights/model.ckpt`
    - Ensure configuration file exists at `configs/patchcore_transformers.yaml`
+   - test_image/test.jpg                   # any test thermal image you want to try
+   - output_image/                         # results will be written here
 
-3. **Add Test Images**
-   - Place your test images in the `test_image/` folder
-   - Supported formats: `.jpg`, `.jpeg`, `.png`, `.bmp`, `.tiff`, `.tif`
-
-## Usage
 
 ### Local Image Processing
 
@@ -62,34 +67,6 @@ This interactive script will:
 - Save results to the `output_image/` folder
 - Display detailed detection results and confidence scores
 - **Start file watcher** to auto-update images when JSON files are edited
-
-#### Method 2: Using the Local Functions Directly
-
-```python
-from test_local_inference import process_local_test_image, list_test_images
-
-# List available test images
-images = list_test_images()
-print("Available images:", images)
-
-# Process a specific image
-result = process_local_test_image("your_image.jpg")
-
-# View results
-print(f"Classification: {result['label']}")
-print(f"Detected boxes: {len(result['boxes'])}")
-for box in result['boxes']:
-    print(f"  - {box['type']}: confidence {box['confidence']:.3f}")
-```
-
-#### Method 3: Using Core Functions for Custom Processing
-
-```python
-from inference_core import run_pipeline_for_image
-
-# Process any image file directly
-result = run_pipeline_for_image("/path/to/your/image.jpg")
-```
 
 ### Key Functions
 
@@ -170,18 +147,6 @@ Each processed image generates a JSON file with the following structure:
 }
 ```
 
-### Editing Detection Results
-
-You can manually edit the JSON files to:
-- Modify bounding box coordinates (`bbox.x`, `bbox.y`, `bbox.width`, `bbox.height`)
-- Change detection types (`type`)
-- Adjust confidence scores (`confidence`)
-- Add or remove detections
-
-**Auto-Update Feature**: Use the file watcher (option 4 in the script) to automatically regenerate labeled images when you save changes to JSON files.
-
-## Output Files
-
 ## Detection Categories
 
 The system can detect and classify:
@@ -197,25 +162,6 @@ Each detection includes:
 - Bounding box coordinates `[x, y, width, height]`
 - Classification type
 - Confidence score (0.0 to 1.0)
-
-## Example Output
-
-```python
-{
-    'label': 'Point Overload (Faulty)',
-    'boxed_path': 'output_image/labeled/test_boxed.png',
-    'mask_path': 'output_image/masks/test_mask.png', 
-    'filtered_path': 'output_image/filtered/test_filtered.png',
-    'json_path': 'output_image/json/test_detections.json',
-    'boxes': [
-        {
-            'box': [150, 200, 80, 60],
-            'type': 'Point Overload (Faulty)', 
-            'confidence': 0.85
-        }
-    ]
-}
-```
 
 ## JSON-Based Workflow
 
@@ -289,19 +235,6 @@ for image_name in list_test_images():
         print(f"Result: {result['label']}")
 ```
 
-### Custom Output Handling
-
-```python
-from inference_core import run_pipeline_for_image
-
-# Process image from any location
-result = run_pipeline_for_image("/path/to/your/image.jpg")
-
-# Access specific outputs
-labeled_image_path = result['boxed_path']
-detection_count = len(result['boxes'])
-```
-
 ## Troubleshooting
 
 1. **Model file not found**: Ensure `model_weights/model.ckpt` exists
@@ -315,8 +248,4 @@ detection_count = len(result['boxes'])
 - The system automatically creates output directories if they don't exist
 - Cloudinary integration is optional and only used for cloud storage (if needed)
 - All local processing works without internet connection
-<<<<<<< HEAD
 - The model supports GPU acceleration when available but works on CPU as well
-=======
-- The model supports GPU acceleration when available but works on CPU as well
->>>>>>> 79296fedd102c10caf74d621caa9f514e282362f
